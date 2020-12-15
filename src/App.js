@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
+import { IconContext } from "react-icons";
+import { FaToggleOn, FaToggleOff } from "react-icons/fa";
+
 import {
   ContainerApp,
   HeaderContainer,
   HeaderContainerLeft,
   HeaderContainerRight,
   ContainerCard,
+  StyledIcon,
 } from "./App.styles";
 
 import CardSocial from "./components/card-social/card-social.component";
 import CardCount from "./components/card-count/card-count.component";
+
+import { ReactComponent as IconToggleOff } from "./assets/switchoff.svg";
+import { ReactComponent as IconToggleOn } from "./assets/switchon.svg";
 
 function App() {
   const [socialAccount, setSocialAccount] = useState([
@@ -112,15 +119,24 @@ function App() {
       count: 1407,
     },
   ]);
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleButton = () => setIsDarkMode(!isDarkMode);
   return (
-    <ContainerApp>
+    <ContainerApp isDarkMode={isDarkMode}>
       <HeaderContainer>
         <HeaderContainerLeft>
           <h1>Social Media Dashboard</h1>
           <h5>Total Followers: 23,004</h5>
         </HeaderContainerLeft>
-        <HeaderContainerRight>
+        <HeaderContainerRight onClick={toggleButton}>
           <span>Dark Mode</span>
+          {isDarkMode ? (
+            <IconToggleOn height="40px" width="50px" />
+          ) : (
+            <IconToggleOff height="40px" width="50px" />
+          )}
         </HeaderContainerRight>
       </HeaderContainer>
       <ContainerCard>
